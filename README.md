@@ -4,9 +4,22 @@ Small **ATM-style flow** modeled in **TypeScript** (Node, ESM): validate a card,
 
 This repo is structured as a **library**: `src/index.ts` exports the step functions; there is no interactive CLI yet.
 
-## Requirements
+## Prerequisites
 
-- [Node.js](https://nodejs.org/) (current LTS is fine)
+### Node.js and npm
+
+Install **[Node.js](https://nodejs.org/)** (current **LTS** is recommended). The official installers for Windows and macOS, and most Linux packages, include **npm**; you do not need a separate npm install.
+
+Check that both are on your `PATH`:
+
+```bash
+node -v
+npm -v
+```
+
+### Docker (optional)
+
+For the container build and test workflow in [Docker](#docker) below, install [Docker Engine](https://docs.docker.com/get-docker/) (or Docker Desktop where you use it).
 
 ## Setup
 
@@ -46,4 +59,13 @@ Tests live under `test/` and target the five exported functions. Run:
 
 ```bash
 npm test
+```
+
+## Docker
+
+The `Dockerfile` installs dependencies, compiles with `tsc`, and runs the unit tests during the image build. Running the container executes the test suite again:
+
+```bash
+docker build -t test-br-atm .
+docker run --rm test-br-atm
 ```
